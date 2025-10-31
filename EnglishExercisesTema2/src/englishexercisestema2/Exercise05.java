@@ -4,72 +4,52 @@ public class Exercise05 {
 
 	public static void main(String[] args) {
 		
-//Create scanner
-		Scanner sc = new Scanner(System.in);
+// Create the scanner
+Scanner sc = new Scanner(System.in);
 
-		// Create the variables 
-        String type1, type2;
-        double value1, value2;
-        double V = 0, D = 0, T = 0;
+// Create variables
+int v = 0;
+int t = 0;
+int d = 0;
+String dato;
 
-        // Ask for first type and value
-        System.out.print("Introduce el tipo de dato: ");
-        type1 = sc.nextLine().toUpperCase();
-
-        System.out.print("Introduce el valor de ese dato: ");
-        value1 = sc.nextDouble();
-        sc.nextLine(); 
-
-        // Then for second type and value
-        System.out.print("Dime otro tipo de dato (V, D, T): ");
-        type2 = sc.nextLine().toUpperCase();
-
-        System.out.print("Dime el valor de ese dato: ");
-        value2 = sc.nextDouble();
-
-        // Calculate the missing value
-        if ((type1.equals("V") && type2.equals("D")) || (type1.equals("D") && type2.equals("V"))) {
-            // Missing T
-            if (type1.equals("V")) {
-                V = value1;
-                D = value2;
-            } else {
-                V = value2;
-                D = value1;
-            }
-            T = D / V;
-            System.out.println("RESULT: T = " + T);
-        } 
-        else if ((type1.equals("V") && type2.equals("T")) || (type1.equals("T") && type2.equals("V"))) {
-           
-       // Missing D
-            if (type1.equals("V")) {
-                V = value1;
-                T = value2;
-            } else {
-                V = value2;
-                T = value1;
-            }
-            D = V * T;
-            System.out.println("RESULT: D = " + D);
-        } 
-        else if ((type1.equals("D") && type2.equals("T")) || (type1.equals("T") && type2.equals("D"))) {
-           
-        // Missing V
-            if (type1.equals("D")) {
-                D = value1;
-                T = value2;
-            } else {
-                D = value2;
-                T = value1;
-            }
-            V = D / T;
-            System.out.println("RESULT: V = " + V);
-        } 
-        else {
-            System.out.println("Invalid input. You must give two different types.");
-        }
-
-        sc.close();
-    }
+// Ask the user to introduce a type of data 
+System.out.println("Introduce V/D/T: ");
+//And read it
+dato = sc.next().toUpperCase();
+//Then ask the user for each value of each data
+System.out.println("Valor:");
+switch (dato) {
+    case "V" -> { v = sc.nextInt(); }
+    case "D" -> { d = sc.nextInt(); }
+    case "T" -> { t = sc.nextInt(); }
+    default -> { System.out.println("Letra incorrecta"); }
 }
+//Then ask the user for the second value of another data
+System.out.println("Introduce V/D/T: ");
+dato = sc.next().toUpperCase();
+System.out.println("Valor:");
+switch (dato) {
+    case "V" -> { v = sc.nextInt(); }
+    case "D" -> { d = sc.nextInt(); }
+    case "T" -> { t = sc.nextInt(); }
+    default -> { System.out.println("Letra incorrecta"); }
+}
+
+// Make another condition to calculate missing value and print the according result of each value
+if (v != 0 && d != 0) {
+    t = d / v;
+    System.out.println("RESULTADO: T = " + t);
+} else if (v != 0 && t != 0) {
+    d = v * t;
+    System.out.println("RESULTADO: D = " + d);
+} else if (d != 0 && t != 0) {
+    v = d / t;
+    System.out.println("RESULTADO: V = " + v);
+} else {
+
+    System.out.println("Datos insuficientes para calcular el resultado.");
+}
+
+//Close the scanner
+sc.close();
